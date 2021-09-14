@@ -43,7 +43,7 @@ export const RightContainer = styled.div`
   }
 
   span {
-    color: blue;
+    color: ${(props) => props.theme.color.blue};
     cursor: pointer;
   }
 `

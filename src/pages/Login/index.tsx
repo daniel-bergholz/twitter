@@ -7,7 +7,7 @@ import {
 import Background from '../../assets/images/login-bg.png'
 import { FaTwitter } from 'react-icons/fa'
 
-const Login = () => {
+const Login: React.FC = () => {
   return (
     <Container>
       <BackgroundContainer>
