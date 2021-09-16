@@ -6,7 +6,8 @@ export const Container = styled.div`
 
 export const BackgroundContainer = styled.div`
   img {
-    height: 100vh;
+    height: 100%;
+    width: 100%;
     object-fit: cover;
   }
 `
