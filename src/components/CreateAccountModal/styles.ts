@@ -5,6 +5,7 @@ export const CenterImage = styled.div`
   padding-bottom: 28px;
 `
 export const Title = styled.h1`
+  margin-bottom: 24px;
   font-weight: 700;
   font-size: 22px;
   font-style: normal;
