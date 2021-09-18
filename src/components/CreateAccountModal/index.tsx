@@ -16,6 +16,9 @@ const CreateAccountModal: React.FC<IProps> = ({ isOpen, setIsOpen }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  const isDisabled =
+    name === '' || username === '' || email === '' || password === ''
+
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
       <CenterImage>
@@ -46,7 +49,7 @@ const CreateAccountModal: React.FC<IProps> = ({ isOpen, setIsOpen }) => {
           onChange={(e) => setPassword(e.target.value)}
         />
       </InputContainer>
-      <Button height="47px" width="100%">
+      <Button height="47px" width="100%" isDisabled={isDisabled}>
         Criar conta
       </Button>
     </Modal>
