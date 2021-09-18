@@ -18,9 +18,10 @@ const CreateAccountModal: React.FC<IProps> = ({ isOpen, setIsOpen }) => {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const isDisabled =
-    name === '' || username === '' || email === '' || password === ''
+    name === '' || username === '' || email === '' || password === '' || loading
 
   const createAccount = async () => {
     const validation = validateCreateAccountFields(
@@ -34,7 +35,7 @@ const CreateAccountModal: React.FC<IProps> = ({ isOpen, setIsOpen }) => {
       toast.error(validation)
     }
 
-    // chamar a API
+    setLoading(true)
     try {
       await api.post('/users', {
         name,
@@ -49,6 +50,7 @@ const CreateAccountModal: React.FC<IProps> = ({ isOpen, setIsOpen }) => {
         error?.response?.data?.message || 'Não foi possível criar a conta'
       )
     }
+    setLoading(false)
   }
 
   const onClose = () => {
