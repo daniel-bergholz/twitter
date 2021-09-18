@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { FaTwitter } from 'react-icons/fa'
+import validateCreateAccountFields from '../../utils/validateCreateAccountFields'
 import Button from '../Button'
 import Input from '../Input'
 import Modal from '../Modal'
@@ -18,6 +19,10 @@ const CreateAccountModal: React.FC<IProps> = ({ isOpen, setIsOpen }) => {
 
   const isDisabled =
     name === '' || username === '' || email === '' || password === ''
+
+  const createAccount = async () => {
+    console.log(validateCreateAccountFields(name, username, email, password))
+  }
 
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -49,7 +54,12 @@ const CreateAccountModal: React.FC<IProps> = ({ isOpen, setIsOpen }) => {
           onChange={(e) => setPassword(e.target.value)}
         />
       </InputContainer>
-      <Button height="47px" width="100%" isDisabled={isDisabled}>
+      <Button
+        height="47px"
+        width="100%"
+        isDisabled={isDisabled}
+        onClick={createAccount}
+      >
         Criar conta
       </Button>
     </Modal>
