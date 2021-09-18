@@ -11,3 +11,12 @@ export const Title = styled.h1`
   font-style: normal;
   line-height: 29px;
 `
+
+export const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  input {
+    margin-bottom: 25px;
+  }
+`
