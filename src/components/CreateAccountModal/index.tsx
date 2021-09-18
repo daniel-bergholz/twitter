@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { FaTwitter } from 'react-icons/fa'
+import { toast } from 'react-toastify'
 import validateCreateAccountFields from '../../utils/validateCreateAccountFields'
 import Button from '../Button'
 import Input from '../Input'
@@ -21,7 +22,16 @@ const CreateAccountModal: React.FC<IProps> = ({ isOpen, setIsOpen }) => {
     name === '' || username === '' || email === '' || password === ''
 
   const createAccount = async () => {
-    console.log(validateCreateAccountFields(name, username, email, password))
+    const validation = validateCreateAccountFields(
+      name,
+      username,
+      email,
+      password
+    )
+
+    if (typeof validation === 'string') {
+      toast.error(validation)
+    }
   }
 
   return (
