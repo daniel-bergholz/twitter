@@ -9,7 +9,7 @@ import Button from '../Button'
 import Input from '../Input'
 import Modal from '../Modal'
 import { CenterImage, InputContainer, Title } from './styles'
-import { useGlobalState } from '../../context/GlobalContext'
+import { IAuth, useGlobalState } from '../../context/GlobalContext'
 
 interface IProps {
   isOpen: boolean
@@ -34,12 +34,12 @@ const LoginModal: React.FC<IProps> = ({ isOpen, setIsOpen }) => {
 
     setLoading(true)
     try {
-      await api.post('/login', {
+      const { data } = await api.post<IAuth>('/login', {
         email,
         password,
       })
+      setAuth(data)
       history.push('/')
-      // onClose()
     } catch (error) {
       toast.error(
         error?.response?.data?.message || 'Não foi possível fazer login'

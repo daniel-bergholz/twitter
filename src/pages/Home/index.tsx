@@ -1,5 +1,9 @@
+import { useGlobalState } from '../../context/GlobalContext'
+
 function App() {
-  return <h1>Meu site!</h1>
+  const { auth } = useGlobalState()
+
+  return <h1>Usuário logado: {auth?.user.name}</h1>
 }
 
 export default App
