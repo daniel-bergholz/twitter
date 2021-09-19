@@ -21,3 +21,17 @@ apiWithAuth.interceptors.request.use(function (config) {
 
   return config
 })
+
+apiWithAuth.interceptors.response.use(
+  function (response) {
+    return response
+  },
+  function (error) {
+    if (error?.response?.status === 401) {
+      localStorage.removeItem('@twitter:auth')
+      window.location.href = '/login'
+    }
+
+    return Promise.reject(error)
+  }
+)
