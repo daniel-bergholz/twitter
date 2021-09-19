@@ -7,6 +7,7 @@ import Login from './pages/Login'
 import { GlobalStyles } from './styles/GlobalStyles'
 import ThemeProvider from './styles/ThemeProvider'
 import 'react-toastify/dist/ReactToastify.css'
+import ProtectedRoute from './components/ProtectedRoute'
 
 const Routes = () => {
   return (
@@ -16,9 +17,9 @@ const Routes = () => {
         <ToastContainer newestOnTop={true} theme="colored" />
         <ThemeProvider>
           <Switch>
-            <Route exact path="/">
+            <ProtectedRoute exact path="/">
               <Home />
-            </Route>
+            </ProtectedRoute>
             <Route path="/login">
               <Login />
             </Route>
