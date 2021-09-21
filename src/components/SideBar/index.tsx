@@ -1,32 +1,44 @@
 import { BsPerson } from 'react-icons/bs'
 import { FaTwitter } from 'react-icons/fa'
 import { FiLogOut } from 'react-icons/fi'
-import { useLocation } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
+import { useGlobalState } from '../../context/GlobalContext'
 
-import { Button, Title } from './styles'
+import { Button, Container, Title } from './styles'
 
 const SideBar: React.FC = () => {
+  const { removeAuth } = useGlobalState()
   const location = useLocation()
+  const history = useHistory()
+
+  const logout = () => {
+    removeAuth()
+    history.push('/login')
+  }
 
   return (
-    <>
+    <Container>
       <FaTwitter color="#fff" size="25px" />
 
-      <Button isSelected={location.pathname === '/'}>
-        <FaTwitter color="#fff" size="25px" />
-        <Title>Página Inicial</Title>
-      </Button>
+      <Link to="/">
+        <Button isSelected={location.pathname === '/'}>
+          <FaTwitter color="#fff" size="25px" />
+          <Title>Página Inicial</Title>
+        </Button>
+      </Link>
 
-      <Button isSelected={location.pathname === '/perfil'}>
-        <BsPerson color="#fff" size="25px" />
-        <Title>Perfil</Title>
-      </Button>
+      <Link to="/perfil">
+        <Button isSelected={location.pathname === '/perfil'}>
+          <BsPerson color="#fff" size="25px" />
+          <Title>Perfil</Title>
+        </Button>
+      </Link>
 
-      <Button>
+      <Button onClick={logout}>
         <FiLogOut color="#fff" size="25px" />
         <Title>Fazer Logout</Title>
       </Button>
-    </>
+    </Container>
   )
 }
 

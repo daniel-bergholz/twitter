@@ -21,7 +21,7 @@ const Routes = () => {
             <ProtectedRoute exact path="/">
               <Home />
             </ProtectedRoute>
-            <ProtectedRoute path="/">
+            <ProtectedRoute path="/perfil">
               <Perfil />
             </ProtectedRoute>
             <Route path="/login">

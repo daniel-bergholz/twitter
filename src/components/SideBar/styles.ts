@@ -4,6 +4,15 @@ interface IProps {
   isSelected?: boolean
 }
 
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  a {
+    width: max-content;
+  }
+`
+
 export const Button = styled.button<IProps>`
   background: none;
   border: none;
