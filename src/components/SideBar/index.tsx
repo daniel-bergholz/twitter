@@ -4,7 +4,7 @@ import { FiLogOut } from 'react-icons/fi'
 import { Link, useHistory, useLocation } from 'react-router-dom'
 import { useGlobalState } from '../../context/GlobalContext'
 
-import { Button, Container, Title } from './styles'
+import { Button, Container, IconContainer, Title } from './styles'
 
 const SideBar: React.FC = () => {
   const { removeAuth } = useGlobalState()
@@ -18,7 +18,9 @@ const SideBar: React.FC = () => {
 
   return (
     <Container>
-      <FaTwitter color="#fff" size="25px" />
+      <IconContainer>
+        <FaTwitter color="#fff" size="25px" />
+      </IconContainer>
 
       <Link to="/">
         <Button isSelected={location.pathname === '/'}>
