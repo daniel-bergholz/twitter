@@ -1,4 +1,10 @@
-import { DropDown, Input, InputContainer } from './styles'
+import {
+  DropDown,
+  Input,
+  InputContainer,
+  UserContainer,
+  UserNames,
+} from './styles'
 import { FiSearch } from 'react-icons/fi'
 import { useState } from 'react'
 
@@ -9,7 +15,8 @@ interface IUsers {
 
 const mockUsers = [
   { name: 'daniel berg', username: 'berg_daniel' },
-  { name: 'Bruno Fraga', username: 'bruno' },
+  { name: 'Bruno Fraga', username: 'bruno_fraga' },
+  { name: 'Luã Álvaro', username: 'lua_alvaro' },
 ]
 
 const SearchInput = () => {
@@ -27,7 +34,16 @@ const SearchInput = () => {
       {users && (
         <DropDown>
           {users?.map((user, index) => (
-            <h1 key={index}>{user.name}</h1>
+            <UserContainer key={index}>
+              <img
+                src={`https://robohash.org/${user.username}`}
+                alt={user.name}
+              />
+              <UserNames>
+                <h1>{user.name}</h1>
+                <h2>@{user.username}</h2>
+              </UserNames>
+            </UserContainer>
           ))}
         </DropDown>
       )}
