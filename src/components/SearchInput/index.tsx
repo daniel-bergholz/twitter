@@ -7,27 +7,29 @@ import {
 } from './styles'
 import { FiSearch } from 'react-icons/fi'
 import { useEffect, useState } from 'react'
+import { apiWithAuth } from '../../services/api'
 
 interface IUsers {
   name: string
   username: string
 }
 
-const mockUsers = [
-  { name: 'daniel berg', username: 'berg_daniel' },
-  { name: 'Bruno Fraga', username: 'bruno_fraga' },
-  { name: 'Luã Álvaro', username: 'lua_alvaro' },
-]
-
 const SearchInput = () => {
   const [isOnFocus, setIsOnFocus] = useState(false)
-  const [users, setUsers] = useState<IUsers[]>(mockUsers)
+  const [users, setUsers] = useState<IUsers[]>()
   const [search, setSearch] = useState('')
 
+  const searchUsers = async () => {
+    const { data } = await apiWithAuth.get(`/users?search=${search}`)
+
+    setUsers(data)
+  }
+
   useEffect(() => {
-    const timeout = setTimeout(() => console.log('CHAMA O BACKEND!'), 1000)
+    const timeout = setTimeout(searchUsers, 800)
 
     return () => clearTimeout(timeout)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search])
 
   return (
@@ -40,7 +42,7 @@ const SearchInput = () => {
         onFocus={() => setIsOnFocus(true)}
         onBlur={() => setIsOnFocus(false)}
       />
-      {users && (
+      {users && isOnFocus && (
         <DropDown>
           {users?.map((user, index) => (
             <UserContainer key={index}>
