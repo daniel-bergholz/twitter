@@ -1,13 +1,39 @@
-import PageWrapper from '../../components/PageWrapper'
+import { useEffect, useState } from 'react'
 import Button from '../../components/Button'
-import { IAuth, useGlobalState } from '../../context/GlobalContext'
-import { TweetButton, TweetContainer, TweetInput, UserName } from './styles'
+import PageWrapper from '../../components/PageWrapper'
 import Tweet from '../../components/Tweet'
+import { IAuth, useGlobalState } from '../../context/GlobalContext'
+import { apiWithAuth } from '../../services/api'
+import { TweetButton, TweetContainer, TweetInput, UserName } from './styles'
+
+interface ITweet {
+  id: string
+  content: string
+  user: {
+    id: string
+    name: string
+    username: string
+    email: string
+  }
+  created_at: string
+}
 
 function Home() {
+  const [tweets, setTweets] = useState<ITweet[]>([])
+
   const {
     auth: { user },
   } = useGlobalState() as { auth: IAuth }
+
+  const getFeed = async () => {
+    const { data } = await apiWithAuth.get<ITweet[]>('/feed')
+
+    setTweets(data)
+  }
+
+  useEffect(() => {
+    getFeed()
+  }, [])
 
   return (
     <PageWrapper
@@ -27,78 +53,15 @@ function Home() {
         </>
       }
     >
-      <Tweet username={user.username} name={user.name}>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod nesciunt
-        incidunt nobis tempore necessitatibus, laborum iure voluptatum aliquam
-        delectus autem fugit, perspiciatis, voluptas sed cum exercitationem
-        neque rerum aliquid velit.
-      </Tweet>
-      <Tweet username={user.username} name={user.name}>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod nesciunt
-        incidunt nobis tempore necessitatibus, laborum iure voluptatum aliquam
-        delectus autem fugit, perspiciatis, voluptas sed cum exercitationem
-        neque rerum aliquid velit.
-      </Tweet>
-      <Tweet username={user.username} name={user.name}>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod nesciunt
-        incidunt nobis tempore necessitatibus, laborum iure voluptatum aliquam
-        delectus autem fugit, perspiciatis, voluptas sed cum exercitationem
-        neque rerum aliquid velit.
-      </Tweet>
-      <Tweet username={user.username} name={user.name}>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod nesciunt
-        incidunt nobis tempore necessitatibus, laborum iure voluptatum aliquam
-        delectus autem fugit, perspiciatis, voluptas sed cum exercitationem
-        neque rerum aliquid velit.
-      </Tweet>
-      <Tweet username={user.username} name={user.name}>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod nesciunt
-        incidunt nobis tempore necessitatibus, laborum iure voluptatum aliquam
-        delectus autem fugit, perspiciatis, voluptas sed cum exercitationem
-        neque rerum aliquid velit.
-      </Tweet>
-      <Tweet username={user.username} name={user.name}>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod nesciunt
-        incidunt nobis tempore necessitatibus, laborum iure voluptatum aliquam
-        delectus autem fugit, perspiciatis, voluptas sed cum exercitationem
-        neque rerum aliquid velit.
-      </Tweet>
-      <Tweet username={user.username} name={user.name}>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod nesciunt
-        incidunt nobis tempore necessitatibus, laborum iure voluptatum aliquam
-        delectus autem fugit, perspiciatis, voluptas sed cum exercitationem
-        neque rerum aliquid velit.
-      </Tweet>
-      <Tweet username={user.username} name={user.name}>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod nesciunt
-        incidunt nobis tempore necessitatibus, laborum iure voluptatum aliquam
-        delectus autem fugit, perspiciatis, voluptas sed cum exercitationem
-        neque rerum aliquid velit.
-      </Tweet>
-      <Tweet username={user.username} name={user.name}>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod nesciunt
-        incidunt nobis tempore necessitatibus, laborum iure voluptatum aliquam
-        delectus autem fugit, perspiciatis, voluptas sed cum exercitationem
-        neque rerum aliquid velit.
-      </Tweet>
-      <Tweet username={user.username} name={user.name}>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod nesciunt
-        incidunt nobis tempore necessitatibus, laborum iure voluptatum aliquam
-        delectus autem fugit, perspiciatis, voluptas sed cum exercitationem
-        neque rerum aliquid velit.
-      </Tweet>
-      <Tweet username={user.username} name={user.name}>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod nesciunt
-        incidunt nobis tempore necessitatibus, laborum iure voluptatum aliquam
-        delectus autem fugit, perspiciatis, voluptas sed cum exercitationem
-        neque rerum aliquid velit.
-      </Tweet>
-      <Tweet username={user.username} name={user.name}>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod nesciunt
-        incidunt nobis tempore necessitatibus, laborum iure voluptatum aliquam
-        delectus autem fugit, perspiciatis, voluptas sed cum exercitationem
-        neque rerum aliquid velit.
-      </Tweet>
+      {tweets.map((tweet) => (
+        <Tweet
+          username={tweet.user.username}
+          name={tweet.user.name}
+          key={tweet.id}
+        >
+          {tweet.content}
+        </Tweet>
+      ))}
     </PageWrapper>
   )
 }
