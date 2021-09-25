@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Button from '../../components/Button'
 import PageWrapper from '../../components/PageWrapper'
+import Tweet from '../../components/Tweet'
 import { apiWithAuth } from '../../services/api'
 import {
   Bio,
@@ -107,6 +108,16 @@ function Perfil() {
               </Follow>
             </FollowContainer>
           </TextsContainer>
+
+          {profile.tweets.map((tweet) => (
+            <Tweet
+              key={tweet.id}
+              name={profile.name}
+              username={profile.username}
+            >
+              {tweet.content}
+            </Tweet>
+          ))}
         </>
       )}
     </PageWrapper>
