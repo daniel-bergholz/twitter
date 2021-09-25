@@ -4,6 +4,7 @@ import { FaRegCalendarAlt } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Button from '../../components/Button'
+import EditProfileModal from '../../components/EditProfileModal'
 import PageWrapper from '../../components/PageWrapper'
 import Tweet from '../../components/Tweet'
 import { apiWithAuth } from '../../services/api'
@@ -39,6 +40,7 @@ interface IProfile {
 }
 
 function Perfil() {
+  const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState(false)
   const [profile, setProfile] = useState<IProfile>()
 
   const getProfile = async () => {
@@ -71,6 +73,10 @@ function Perfil() {
         </FixedContentContainer>
       }
     >
+      <EditProfileModal
+        isOpen={isEditProfileModalOpen}
+        setIsOpen={setIsEditProfileModalOpen}
+      />
       {profile && (
         <>
           <ImageContainer>
@@ -78,7 +84,11 @@ function Perfil() {
               src={`https://robohash.org/${profile?.username}`}
               alt={profile?.name}
             />
-            <Button variant="black" height="33px">
+            <Button
+              variant="black"
+              height="33px"
+              onClick={() => setIsEditProfileModalOpen(true)}
+            >
               Editar perfil
             </Button>
           </ImageContainer>
