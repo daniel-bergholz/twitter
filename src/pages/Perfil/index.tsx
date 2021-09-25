@@ -76,6 +76,7 @@ function Perfil() {
       <EditProfileModal
         isOpen={isEditProfileModalOpen}
         setIsOpen={setIsEditProfileModalOpen}
+        getProfile={getProfile}
       />
       {profile && (
         <>
