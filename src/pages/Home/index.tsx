@@ -1,20 +1,23 @@
 import PageWrapper from '../../components/PageWrapper'
 import Button from '../../components/Button'
-import { useGlobalState } from '../../context/GlobalContext'
+import { IAuth, useGlobalState } from '../../context/GlobalContext'
 import { TweetButton, TweetContainer, TweetInput, UserName } from './styles'
+import Tweet from '../../components/Tweet'
 
 function Home() {
-  const { auth } = useGlobalState()
+  const {
+    auth: { user },
+  } = useGlobalState() as { auth: IAuth }
 
   return (
     <PageWrapper
       fixedContent={
         <>
-          <UserName>{auth?.user.name}</UserName>
+          <UserName>{user.name}</UserName>
           <TweetContainer>
             <img
-              src={`https://robohash.org/${auth?.user.username}`}
-              alt={auth?.user.name}
+              src={`https://robohash.org/${user.username}`}
+              alt={user.name}
             />
             <TweetInput placeholder="O que está acontecendo?" />
           </TweetContainer>
@@ -24,42 +27,78 @@ function Home() {
         </>
       }
     >
-      <h1>Meu primeiro Tweet!</h1>
-      <h1>Meu segundo Tweet!</h1>
-      <h1>Meu terceiro Tweet!</h1>
-      <div style={{ paddingTop: '50px', paddingBottom: '50px' }} />
-      <h1>Meu primeiro Tweet!</h1>
-      <h1>Meu segundo Tweet!</h1>
-      <h1>Meu terceiro Tweet!</h1>
-      <div style={{ paddingTop: '50px', paddingBottom: '50px' }} />
-      <h1>Meu primeiro Tweet!</h1>
-      <h1>Meu segundo Tweet!</h1>
-      <h1>Meu terceiro Tweet!</h1>
-      <div style={{ paddingTop: '50px', paddingBottom: '50px' }} />
-      <h1>Meu primeiro Tweet!</h1>
-      <h1>Meu segundo Tweet!</h1>
-      <h1>Meu terceiro Tweet!</h1>
-      <div style={{ paddingTop: '50px', paddingBottom: '50px' }} />
-      <h1>Meu primeiro Tweet!</h1>
-      <h1>Meu segundo Tweet!</h1>
-      <h1>Meu terceiro Tweet!</h1>
-      <div style={{ paddingTop: '50px', paddingBottom: '50px' }} />
-      <h1>Meu primeiro Tweet!</h1>
-      <h1>Meu segundo Tweet!</h1>
-      <h1>Meu terceiro Tweet!</h1>
-      <div style={{ paddingTop: '50px', paddingBottom: '50px' }} />
-      <h1>Meu primeiro Tweet!</h1>
-      <h1>Meu segundo Tweet!</h1>
-      <h1>Meu terceiro Tweet!</h1>
-      <div style={{ paddingTop: '50px', paddingBottom: '50px' }} />
-      <h1>Meu primeiro Tweet!</h1>
-      <h1>Meu segundo Tweet!</h1>
-      <h1>Meu terceiro Tweet!</h1>
-      <div style={{ paddingTop: '50px', paddingBottom: '50px' }} />
-      <h1>Meu primeiro Tweet!</h1>
-      <h1>Meu segundo Tweet!</h1>
-      <h1>Meu terceiro Tweet!</h1>
-      <div style={{ paddingTop: '50px', paddingBottom: '50px' }} />
+      <Tweet username={user.username} name={user.name}>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod nesciunt
+        incidunt nobis tempore necessitatibus, laborum iure voluptatum aliquam
+        delectus autem fugit, perspiciatis, voluptas sed cum exercitationem
+        neque rerum aliquid velit.
+      </Tweet>
+      <Tweet username={user.username} name={user.name}>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod nesciunt
+        incidunt nobis tempore necessitatibus, laborum iure voluptatum aliquam
+        delectus autem fugit, perspiciatis, voluptas sed cum exercitationem
+        neque rerum aliquid velit.
+      </Tweet>
+      <Tweet username={user.username} name={user.name}>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod nesciunt
+        incidunt nobis tempore necessitatibus, laborum iure voluptatum aliquam
+        delectus autem fugit, perspiciatis, voluptas sed cum exercitationem
+        neque rerum aliquid velit.
+      </Tweet>
+      <Tweet username={user.username} name={user.name}>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod nesciunt
+        incidunt nobis tempore necessitatibus, laborum iure voluptatum aliquam
+        delectus autem fugit, perspiciatis, voluptas sed cum exercitationem
+        neque rerum aliquid velit.
+      </Tweet>
+      <Tweet username={user.username} name={user.name}>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod nesciunt
+        incidunt nobis tempore necessitatibus, laborum iure voluptatum aliquam
+        delectus autem fugit, perspiciatis, voluptas sed cum exercitationem
+        neque rerum aliquid velit.
+      </Tweet>
+      <Tweet username={user.username} name={user.name}>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod nesciunt
+        incidunt nobis tempore necessitatibus, laborum iure voluptatum aliquam
+        delectus autem fugit, perspiciatis, voluptas sed cum exercitationem
+        neque rerum aliquid velit.
+      </Tweet>
+      <Tweet username={user.username} name={user.name}>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod nesciunt
+        incidunt nobis tempore necessitatibus, laborum iure voluptatum aliquam
+        delectus autem fugit, perspiciatis, voluptas sed cum exercitationem
+        neque rerum aliquid velit.
+      </Tweet>
+      <Tweet username={user.username} name={user.name}>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod nesciunt
+        incidunt nobis tempore necessitatibus, laborum iure voluptatum aliquam
+        delectus autem fugit, perspiciatis, voluptas sed cum exercitationem
+        neque rerum aliquid velit.
+      </Tweet>
+      <Tweet username={user.username} name={user.name}>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod nesciunt
+        incidunt nobis tempore necessitatibus, laborum iure voluptatum aliquam
+        delectus autem fugit, perspiciatis, voluptas sed cum exercitationem
+        neque rerum aliquid velit.
+      </Tweet>
+      <Tweet username={user.username} name={user.name}>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod nesciunt
+        incidunt nobis tempore necessitatibus, laborum iure voluptatum aliquam
+        delectus autem fugit, perspiciatis, voluptas sed cum exercitationem
+        neque rerum aliquid velit.
+      </Tweet>
+      <Tweet username={user.username} name={user.name}>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod nesciunt
+        incidunt nobis tempore necessitatibus, laborum iure voluptatum aliquam
+        delectus autem fugit, perspiciatis, voluptas sed cum exercitationem
+        neque rerum aliquid velit.
+      </Tweet>
+      <Tweet username={user.username} name={user.name}>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod nesciunt
+        incidunt nobis tempore necessitatibus, laborum iure voluptatum aliquam
+        delectus autem fugit, perspiciatis, voluptas sed cum exercitationem
+        neque rerum aliquid velit.
+      </Tweet>
     </PageWrapper>
   )
 }
