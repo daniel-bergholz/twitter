@@ -1,12 +1,27 @@
 import PageWrapper from '../../components/PageWrapper'
+import Button from '../../components/Button'
+import { useGlobalState } from '../../context/GlobalContext'
+import { TweetButton, TweetContainer, TweetInput, UserName } from './styles'
 
 function Home() {
+  const { auth } = useGlobalState()
+
   return (
     <PageWrapper
       fixedContent={
-        <h1 style={{ paddingTop: '15px', paddingBottom: '15px' }}>
-          Daniel Berg
-        </h1>
+        <>
+          <UserName>{auth?.user.name}</UserName>
+          <TweetContainer>
+            <img
+              src={`https://robohash.org/${auth?.user.username}`}
+              alt={auth?.user.name}
+            />
+            <TweetInput placeholder="O que está acontecendo?" />
+          </TweetContainer>
+          <TweetButton>
+            <Button>Tweet</Button>
+          </TweetButton>
+        </>
       }
     >
       <h1>Meu primeiro Tweet!</h1>
