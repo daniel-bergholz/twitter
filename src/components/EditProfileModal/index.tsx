@@ -1,7 +1,7 @@
-import { request } from 'https'
 import { useState } from 'react'
 import { CgClose } from 'react-icons/cg'
 import { toast } from 'react-toastify'
+import { useGlobalState } from '../../context/GlobalContext'
 import { apiWithAuth } from '../../services/api'
 import Button from '../Button'
 import Input from '../Input'
@@ -12,6 +12,14 @@ import {
   ModalHeaderClose,
   ModalHeaderTitle,
 } from './styles'
+
+interface IResponse {
+  id: string
+  name: string
+  bio: string | null
+  username: string
+  email: string
+}
 
 interface IProps {
   isOpen: boolean
@@ -28,6 +36,8 @@ const EditProfileModal: React.FC<IProps> = ({
   const [bio, setBio] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
+
+  const { setName: setUserName } = useGlobalState()
 
   const isDisabled =
     (name === '' && bio === '' && password === '') ||
@@ -52,7 +62,8 @@ const EditProfileModal: React.FC<IProps> = ({
     setLoading(true)
 
     try {
-      await apiWithAuth.put('/profile', requestBody)
+      const { data } = await apiWithAuth.put<IResponse>('/profile', requestBody)
+      setUserName(data.name)
       handleCloseModal(true)
     } catch (error) {
       console.log({ error })
