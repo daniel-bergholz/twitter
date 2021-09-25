@@ -13,6 +13,7 @@ export interface IAuth {
 interface IGlobalState {
   auth?: IAuth
   setAuth: (auth: IAuth) => void
+  setName: (name: string) => void
   removeAuth: () => void
 }
 
@@ -31,8 +32,18 @@ export const GlobalStateProvider: React.FC = ({ children }) => {
 
   const setAuth = (auth: IAuth) => {
     localStorage.setItem('@twitter:auth', JSON.stringify(auth))
-
     setAuthState(auth)
+  }
+
+  const setName = (name: string) => {
+    if (!auth) return
+
+    const newAuth = auth
+    newAuth.user.name = name
+
+    localStorage.removeItem('@twitter:auth')
+    localStorage.setItem('@twitter:auth', JSON.stringify(newAuth))
+    setAuthState(newAuth)
   }
 
   const removeAuth = () => {
@@ -41,7 +52,7 @@ export const GlobalStateProvider: React.FC = ({ children }) => {
   }
 
   return (
-    <GlobalContext.Provider value={{ auth, setAuth, removeAuth }}>
+    <GlobalContext.Provider value={{ auth, setAuth, removeAuth, setName }}>
       {children}
     </GlobalContext.Provider>
   )
