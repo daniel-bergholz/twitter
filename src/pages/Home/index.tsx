@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 import Button from '../../components/Button'
 import PageWrapper from '../../components/PageWrapper'
 import Tweet from '../../components/Tweet'
@@ -20,15 +21,42 @@ interface ITweet {
 
 function Home() {
   const [tweets, setTweets] = useState<ITweet[]>([])
+  const [content, setContent] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const {
     auth: { user },
   } = useGlobalState() as { auth: IAuth }
 
-  const getFeed = async () => {
-    const { data } = await apiWithAuth.get<ITweet[]>('/feed')
+  const createTweet = async () => {
+    try {
+      await apiWithAuth.post<ITweet[]>('/tweets', { content })
+      setContent('')
+      await getFeed()
+    } catch (err) {
+      console.log({ err })
+      toast.error(
+        err?.response?.data?.message.join(', ') ||
+          'Não foi possível fazer o tweet'
+      )
+    }
+  }
 
-    setTweets(data)
+  const getFeed = async () => {
+    setLoading(true)
+
+    try {
+      const { data } = await apiWithAuth.get<ITweet[]>('/feed')
+      setTweets(data)
+    } catch (err) {
+      console.log({ err })
+      toast.error(
+        err?.response?.data?.message.join(', ') ||
+          'Não foi possível carregar o feed'
+      )
+    }
+
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -45,10 +73,19 @@ function Home() {
               src={`https://robohash.org/${user.username}`}
               alt={user.name}
             />
-            <TweetInput placeholder="O que está acontecendo?" />
+            <TweetInput
+              placeholder="O que está acontecendo?"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+            />
           </TweetContainer>
           <TweetButton>
-            <Button>Tweet</Button>
+            <Button
+              onClick={createTweet}
+              isDisabled={loading || content === ''}
+            >
+              Tweet
+            </Button>
           </TweetButton>
         </>
       }
