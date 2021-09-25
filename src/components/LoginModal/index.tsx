@@ -42,7 +42,8 @@ const LoginModal: React.FC<IProps> = ({ isOpen, setIsOpen }) => {
       history.push('/')
     } catch (error) {
       toast.error(
-        error?.response?.data?.message || 'Não foi possível fazer login'
+        error?.response?.data?.message.join(', ') ||
+          'Não foi possível fazer login'
       )
     }
     setLoading(false)
