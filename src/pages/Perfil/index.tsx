@@ -34,7 +34,9 @@ function Perfil() {
     >
       <ImageContainer>
         <img src={`https://robohash.org/${2}`} alt={'2'} />
-        <Button>Editar perfil</Button>
+        <Button variant="black" height="33px">
+          Editar perfil
+        </Button>
       </ImageContainer>
 
       <TextsContainer>
