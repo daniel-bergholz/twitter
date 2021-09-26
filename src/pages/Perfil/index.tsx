@@ -180,14 +180,16 @@ function Perfil() {
               </CreatedAt>
             </CreatedAtContainer>
 
-            <FollowContainer>
-              <Follow>
-                {profile?.number_of_follows} <span>Seguindo</span>{' '}
-              </Follow>
-              <Follow>
-                {profile?.number_of_followers} <span>Seguidores</span>{' '}
-              </Follow>
-            </FollowContainer>
+            <Link to="/perfil/seguidores">
+              <FollowContainer>
+                <Follow>
+                  {profile?.number_of_follows} <span>Seguindo</span>{' '}
+                </Follow>
+                <Follow>
+                  {profile?.number_of_followers} <span>Seguidores</span>{' '}
+                </Follow>
+              </FollowContainer>
+            </Link>
           </TextsContainer>
 
           {profile.tweets.map((tweet) => (
