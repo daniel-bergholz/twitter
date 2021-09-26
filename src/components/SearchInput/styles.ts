@@ -48,7 +48,7 @@ export const DropDown = styled.div`
   border: 1px solid #2f3336;
   border-radius: 8px;
   padding: 20px;
-  max-height: 400px;
+  max-height: 575px;
   overflow: auto;
 
   &::-webkit-scrollbar {
