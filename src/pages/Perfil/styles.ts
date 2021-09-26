@@ -27,6 +27,7 @@ export const FixedContentTexts = styled.div`
 `
 
 export const ImageContainer = styled.div`
+  margin-top: 24px;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
