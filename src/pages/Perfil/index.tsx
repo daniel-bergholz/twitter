@@ -48,6 +48,7 @@ interface IProfile {
 function Perfil() {
   const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState(false)
   const [profile, setProfile] = useState<IProfile>()
+  const [loading, setLoading] = useState(false)
 
   const { username } = useParams<IParams>()
   const {
@@ -66,6 +67,39 @@ function Perfil() {
       console.log({ error })
       toast.error(
         error?.response?.data?.message.join(', ') || 'Erro ao carregar o perfil'
+      )
+    }
+    setLoading(false)
+  }
+
+  const follow = async (follow_user_id: string) => {
+    setLoading(true)
+    try {
+      await apiWithAuth.post('/follows', {
+        follow_user_id,
+      })
+      getProfile()
+    } catch (error) {
+      console.log({ error })
+      toast.error(
+        error?.response?.data?.message?.join(', ') || 'Erro ao dar follow'
+      )
+    }
+  }
+
+  const unfollow = async (follow_user_id: string) => {
+    setLoading(true)
+    try {
+      await apiWithAuth.delete('/follows', {
+        data: {
+          follow_user_id,
+        },
+      })
+      getProfile()
+    } catch (error) {
+      console.log({ error })
+      toast.error(
+        error?.response?.data?.message?.join(', ') || 'Erro ao dar unfollow'
       )
     }
   }
@@ -109,12 +143,23 @@ function Perfil() {
               >
                 Editar perfil
               </Button>
+            ) : profile.isFollowing ? (
+              <Button
+                variant="black"
+                height="33px"
+                onClick={() => unfollow(profile.id)}
+                isDisabled={loading}
+              >
+                Seguindo
+              </Button>
             ) : (
               <Button
-                variant={profile.isFollowing ? 'black' : 'white'}
+                variant="white"
                 height="33px"
+                onClick={() => follow(profile.id)}
+                isDisabled={loading}
               >
-                {profile.isFollowing ? 'Seguindo' : 'Seguir'}
+                Seguir
               </Button>
             )}
           </ImageContainer>
