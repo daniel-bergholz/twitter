@@ -33,6 +33,7 @@ const CreateAccountModal: React.FC<IProps> = ({ isOpen, setIsOpen }) => {
 
     if (typeof validation === 'string') {
       toast.error(validation)
+      return
     }
 
     setLoading(true)
