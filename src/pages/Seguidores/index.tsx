@@ -7,6 +7,8 @@ import {
   FixedContentTexts,
   FollowContainer,
   FollowTitle,
+  UserContainer,
+  UserText,
 } from './styles'
 
 const Seguidores = () => {
@@ -34,7 +36,27 @@ const Seguidores = () => {
         </>
       }
     >
-      <h1>Página de seguidores</h1>
+      <Link to={`/perfil/${user.username}`}>
+        <UserContainer>
+          <img src={`https://robohash.org/${user.username}`} alt={user.name} />
+          <UserText>
+            <h1>{user.name}</h1>
+            <h2>@{user.username}</h2>
+            <p>CTO | Maratonas Academy e dev frontend</p>
+          </UserText>
+        </UserContainer>
+      </Link>
+
+      <Link to={`/perfil/${user.username}`}>
+        <UserContainer>
+          <img src={`https://robohash.org/${user.username}`} alt={user.name} />
+          <UserText>
+            <h1>{user.name}</h1>
+            <h2>@{user.username}</h2>
+            <p>CTO | Maratonas Academy e dev frontend</p>
+          </UserText>
+        </UserContainer>
+      </Link>
     </PageWrapper>
   )
 }
