@@ -51,6 +51,14 @@ export const DropDown = styled.div`
   max-height: 575px;
   overflow: auto;
 
+  a {
+    display: block;
+  }
+
+  a:not(:last-child) {
+    margin-bottom: 14px;
+  }
+
   &::-webkit-scrollbar {
     width: 10px;
   }
@@ -88,9 +96,5 @@ export const UserContainer = styled.div`
     border-radius: 50%;
     height: 49px;
     width: 49px;
-  }
-
-  &:not(:last-child) {
-    margin-bottom: 14px;
   }
 `

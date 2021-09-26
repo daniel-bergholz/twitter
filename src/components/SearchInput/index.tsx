@@ -8,6 +8,7 @@ import {
 import { FiSearch } from 'react-icons/fi'
 import { useEffect, useState } from 'react'
 import { apiWithAuth } from '../../services/api'
+import { Link } from 'react-router-dom'
 
 interface IUsers {
   name: string
@@ -50,16 +51,18 @@ const SearchInput = () => {
           }}
         >
           {users?.map((user, index) => (
-            <UserContainer key={index}>
-              <img
-                src={`https://robohash.org/${user.username}`}
-                alt={user.name}
-              />
-              <UserNames>
-                <h1>{user.name}</h1>
-                <h2>@{user.username}</h2>
-              </UserNames>
-            </UserContainer>
+            <Link key={index} to={`/perfil/${user.username}`}>
+              <UserContainer>
+                <img
+                  src={`https://robohash.org/${user.username}`}
+                  alt={user.name}
+                />
+                <UserNames>
+                  <h1>{user.name}</h1>
+                  <h2>@{user.username}</h2>
+                </UserNames>
+              </UserContainer>
+            </Link>
           ))}
         </DropDown>
       )}
