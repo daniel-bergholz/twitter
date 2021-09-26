@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
 import { BiArrowBack } from 'react-icons/bi'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useHistory } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import PageWrapper from '../../components/PageWrapper'
 import { IAuth, useGlobalState } from '../../context/GlobalContext'
@@ -34,6 +34,8 @@ interface IFollows {
 const Seguidores = () => {
   const [data, setData] = useState<IFollows>()
   const [showFollowers, setShowFollowers] = useState(true)
+
+  const history = useHistory()
   const { username } = useParams<IParams>()
 
   const isMyFollowsPage = !username
@@ -66,9 +68,7 @@ const Seguidores = () => {
       fixedContent={
         <>
           <FixedContentContainer>
-            <Link to="/perfil">
-              <BiArrowBack size="15px" />
-            </Link>
+            <BiArrowBack size="15px" onClick={() => history.goBack()} />
             <FixedContentTexts>
               <h1>{isMyFollowsPage ? user.name : data?.name}</h1>
             </FixedContentTexts>
