@@ -180,7 +180,13 @@ function Perfil() {
               </CreatedAt>
             </CreatedAtContainer>
 
-            <Link to="/perfil/seguidores">
+            <Link
+              to={
+                isMyProfile
+                  ? '/perfil/seguidores'
+                  : `/perfil/${profile.username}/seguidores`
+              }
+            >
               <FollowContainer>
                 <Follow>
                   {profile?.number_of_follows} <span>Seguindo</span>{' '}
